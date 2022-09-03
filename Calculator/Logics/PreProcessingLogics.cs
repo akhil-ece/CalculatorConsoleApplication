@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Calculator.Logics
 {
-    public class OperatorReplaceLogics
+    public class PreProcessingLogics
     {
         public string ReplaceOperatorNames(string s)
         { 
