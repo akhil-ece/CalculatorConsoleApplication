@@ -6,9 +6,9 @@ namespace Calculator.Utilities
 {
     public class Pair
     {
-        public Stack<int> stP;
+        public Stack<double> stP;
         public char sign;
-        public Pair(Stack<int> stP, char sign)
+        public Pair(Stack<double> stP, char sign)
         {
             this.stP = stP;
             this.sign = sign;

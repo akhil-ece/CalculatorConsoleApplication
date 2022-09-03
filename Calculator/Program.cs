@@ -7,12 +7,27 @@ namespace Calculator
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-            string sampleInputString = "4 plus (5 minus 5) + 5 * 45 + 4 (minus 2)";
-            CalculatorLogics calculator = new CalculatorLogics();
-            OperatorReplaceLogics operatorReplaceLogics = new OperatorReplaceLogics();
-            sampleInputString = operatorReplaceLogics.ReplaceOperatorNames(sampleInputString);
-            Console.WriteLine(calculator.Calculate(sampleInputString));
+            Console.WriteLine("Calculator App Is Running");
+            Console.WriteLine("*************************");
+            Console.WriteLine("..");
+            Console.WriteLine("Press 'q' to Exit");
+
+            while (true)
+            {
+                Console.WriteLine();
+                Console.WriteLine("Enter The String to Calculate");
+                string sampleInputString = Console.ReadLine();
+                if (string.Equals(sampleInputString.ToLower(), "q"))
+                {
+                    Console.WriteLine("Thank You!!");
+                    break;
+                }
+                CalculatorLogics calculator = new CalculatorLogics();
+                PreProcessingLogics preProcessingLogics = new PreProcessingLogics();
+                string processedSampleInputString = preProcessingLogics.ReplaceOperatorNames(sampleInputString);
+                Console.WriteLine(sampleInputString + " = " + calculator.Calculate(processedSampleInputString).ToString());
+            }
+            
         }
     }
 }
