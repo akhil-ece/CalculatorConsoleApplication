@@ -1,10 +1,9 @@
 ﻿using Calculator.Utilities.OperatorInterfaces;
-using Calculator.Utilities.Operators;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Calculator.Utilities
+namespace Calculator.Utilities.Operators
 {
     public class InStackCalculationOperatorFetch
     {
@@ -14,7 +13,7 @@ namespace Calculator.Utilities
             switch (sign)
             {
                 case '+':
-                    operatorMethods =  new PlusOperator();
+                    operatorMethods = new PlusOperator();
                     break;
                 case '-':
                     operatorMethods = new MinusOperator();

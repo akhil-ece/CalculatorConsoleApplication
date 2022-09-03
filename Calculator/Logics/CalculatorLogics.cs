@@ -1,6 +1,7 @@
 ﻿using Calculator.Enums;
 using Calculator.Utilities;
 using Calculator.Utilities.OperatorInterfaces;
+using Calculator.Utilities.Operators;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -71,23 +72,6 @@ namespace Calculator.Logics
             {
                 st.Push(operatorMethod.Calculate(st, sign, val));
             }
-            //switch (sign)
-            //{
-            //    case '+':
-            //        st.Push(val);
-            //        break;
-            //    case '-':
-            //        st.Push(-val);
-            //        break;
-            //    case '*':
-            //        st.Push(st.Pop() * val);
-            //        break ;
-            //    case '/':
-            //        st.Push(st.Pop() / val);
-            //        break ;
-            //    default:
-            //        break;
-            //}
         }
     }
 }
