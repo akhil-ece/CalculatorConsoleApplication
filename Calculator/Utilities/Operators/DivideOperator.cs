@@ -9,6 +9,10 @@ namespace Calculator.Utilities.Operators
     {
         public double Calculate(Stack<double> st, char sign, double val)
         {
+            if (val == 0)
+            {
+                throw new DivideByZeroException();
+            }
             return st.Pop() / val;
         }
     }
