@@ -10,46 +10,51 @@ namespace Calculator.Logics
 {
     public class CalculatorLogics
     {
-        public double Calculate(string s)
+        public double Calculate(string userMathString) 
         {
-            Stack<Pair> stp = new Stack<Pair>();
-            Stack<double> st = new Stack<double> ();
-            int n = s.Length;
+            //We can accept multiple strings and execute them 
+            return CalculateMethod(userMathString);
+        }
+        private double CalculateMethod(string userMathString)
+        {
+            Stack<MultiStack> multiStack = new Stack<MultiStack>();
+            Stack<double> currentStack = new Stack<double> ();
+            int inputLength = userMathString.Length;
             char sign = '+';
-            for (int i = 0; i < s.Length; i++) 
+            for (int i = 0; i < userMathString.Length; i++) 
             {
-                char ch = s[i];
+                char ch = userMathString[i];
                 if (char.IsDigit(ch))
                 {
                     double val = 0;
-                    while (i < n && char.IsDigit(s[i]))
+                    while (i < inputLength && char.IsDigit(userMathString[i]))
                     {
-                        val = val * 10 + s[i] - (int)UtilitiesEnum.CharZeroASCIIValue;
+                        val = val * 10 + userMathString[i] - (int)UtilitiesEnum.CharZeroASCIIValue;
                         i++;
                     }
                     i--;
-                    InStackCalculation(st, sign, val);
+                    InStackCalculation(currentStack, sign, val);
                 }
                 else
                 {
                     if (ch == '(')
                     {
-                        stp.Push(new Pair(st, sign));
+                        multiStack.Push(new MultiStack(currentStack, sign));
                         sign = '+';
-                        st = new Stack<double>();
+                        currentStack = new Stack<double>();
                     }
                     else
                     if (ch == ')')
                     {
-                        Pair p = stp.Pop();
+                        MultiStack p = multiStack.Pop();
                         double sum = 0;
-                        while (st.Count > 0)
+                        while (currentStack.Count > 0)
                         {
-                            sum += st.Pop();
+                            sum += currentStack.Pop();
                         }
-                        st = p.stP;
+                        currentStack = p.stP;
                         sign = p.sign;
-                        InStackCalculation(st, sign, sum);
+                        InStackCalculation(currentStack, sign, sum);
                     }
                     else
                     if (ch != ' ')
@@ -59,13 +64,13 @@ namespace Calculator.Logics
                 }
             }
             double sumFinal = 0;
-            while (st.Count > 0)
+            while (currentStack.Count > 0)
             {
-                sumFinal += st.Pop();
+                sumFinal += currentStack.Pop();
             }
             return sumFinal;
         }
-        public void InStackCalculation(Stack<double> st, char sign, double val)
+        private void InStackCalculation(Stack<double> st, char sign, double val)
         {
             IOperatorMethods operatorMethod = InStackCalculationOperatorFetch.InStackCalculationOperatorMethod(sign);
             if (operatorMethod != null)

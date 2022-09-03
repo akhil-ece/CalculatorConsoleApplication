@@ -4,11 +4,11 @@ using System.Text;
 
 namespace Calculator.Utilities
 {
-    public class Pair
+    public class MultiStack
     {
         public Stack<double> stP;
         public char sign;
-        public Pair(Stack<double> stP, char sign)
+        public MultiStack(Stack<double> stP, char sign)
         {
             this.stP = stP;
             this.sign = sign;
