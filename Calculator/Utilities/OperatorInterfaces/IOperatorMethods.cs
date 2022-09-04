@@ -6,6 +6,6 @@ namespace Calculator.Utilities.OperatorInterfaces
 {
     public interface IOperatorMethods
     {
-        public double Calculate(Stack<double> st, char sign, double val);
+        public double Calculate(Stack<double> currentStack, char sign, double val);
     }
 }

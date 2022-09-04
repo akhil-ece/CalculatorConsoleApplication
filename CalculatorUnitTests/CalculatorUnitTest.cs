@@ -100,5 +100,14 @@ namespace CalculatorUnitTests
             double actual = calculator.Calculate(sampleInputString);
             Assert.AreEqual(expected, actual, 0.001, "Incorrect Result");
         }
+        [TestMethod]
+        public void NestedBracesTest()
+        {
+            string sampleInputString = "(4 plus 2) - (5 minus 5 plus (4 + 2 - 1 + (2 * 9))) + (5 * 5) * (4 - 2)";
+            sampleInputString = preProcessingLogics.ReplaceOperatorNames(sampleInputString);
+            double expected = 33;
+            double actual = calculator.Calculate(sampleInputString);
+            Assert.AreEqual(expected, actual, 0.001, "Incorrect Result");
+        }
     }
 }
