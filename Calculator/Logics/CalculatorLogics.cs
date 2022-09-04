@@ -12,7 +12,6 @@ namespace Calculator.Logics
     {
         public double Calculate(string userMathString) 
         {
-            //We can accept multiple strings and execute them 
             return CalculateMethod(userMathString);
         }
         private double CalculateMethod(string userMathString)
@@ -23,46 +22,50 @@ namespace Calculator.Logics
             char sign = '+';
             for (int i = 0; i < userMathString.Length; i++) 
             {
-                char ch = userMathString[i];
-                if (char.IsDigit(ch))
+                char currentCharacter = userMathString[i];
+                if (char.IsDigit(currentCharacter))
                 {
-                    double val = 0;
+                    //Logic for maintaining the current number(say entered 123, we need to prepare the number 123 from "123")
+                    double currentNumberVal = 0;
                     while (i < inputLength && char.IsDigit(userMathString[i]))
                     {
-                        val = val * 10 + userMathString[i] - (int)UtilitiesEnum.CharZeroASCIIValue;
+                        currentNumberVal = currentNumberVal * 10 + userMathString[i] - (int)UtilitiesEnum.CharZeroASCIIValue;
                         i++;
                     }
                     i--;
-                    InStackCalculation(currentStack, sign, val);
+                    InStackCalculation(currentStack, sign, currentNumberVal);
                 }
                 else
                 {
-                    if (ch == '(')
+                    if (currentCharacter == '(')
                     {
                         multiStack.Push(new MultiStack(currentStack, sign));
                         sign = '+';
                         currentStack = new Stack<double>();
                     }
                     else
-                    if (ch == ')')
+                    if (currentCharacter == ')')
                     {
-                        MultiStack p = multiStack.Pop();
+                        MultiStack previouslyPushedStack = multiStack.Pop();
                         double sum = 0;
+                        //Finishing the current stack before processing the collected stack
                         while (currentStack.Count > 0)
                         {
                             sum += currentStack.Pop();
                         }
-                        currentStack = p.stP;
-                        sign = p.sign;
+                        //Updating the Current Stack with the collected stack
+                        currentStack = previouslyPushedStack.stP;
+                        sign = previouslyPushedStack.sign;
                         InStackCalculation(currentStack, sign, sum);
                     }
                     else
-                    if (ch != ' ')
+                    if (currentCharacter != ' ')
                     {
-                        sign = ch;
+                        sign = currentCharacter;
                     }
                 }
             }
+            //End operation where all the items of stack(which are either positive or negative numbers getting added up)
             double sumFinal = 0;
             while (currentStack.Count > 0)
             {
@@ -70,12 +73,13 @@ namespace Calculator.Logics
             }
             return sumFinal;
         }
-        private void InStackCalculation(Stack<double> st, char sign, double val)
+        private void InStackCalculation(Stack<double> currentStack, char sign, double val)
         {
+            //Sign specific class will be fetched and will be updated to the stack
             IOperatorMethods operatorMethod = InStackCalculationOperatorFetch.InStackCalculationOperatorMethod(sign);
             if (operatorMethod != null)
             {
-                st.Push(operatorMethod.Calculate(st, sign, val));
+                currentStack.Push(operatorMethod.Calculate(currentStack, sign, val));
             }
         }
     }

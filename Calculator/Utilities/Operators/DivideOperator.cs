@@ -7,13 +7,13 @@ namespace Calculator.Utilities.Operators
 {
     internal class DivideOperator : IOperatorMethods
     {
-        public double Calculate(Stack<double> st, char sign, double val)
+        public double Calculate(Stack<double> currentStack, char sign, double val)
         {
             if (val == 0)
             {
                 throw new DivideByZeroException();
             }
-            return st.Pop() / val;
+            return currentStack.Pop() / val;
         }
     }
 }

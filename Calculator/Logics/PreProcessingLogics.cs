@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Calculator.Enums;
+using System;
 using System.Collections.Generic;
 using System.Text;
+using Calculator.Utilities.Operators;
 
 namespace Calculator.Logics
 {
@@ -9,10 +11,11 @@ namespace Calculator.Logics
         public string ReplaceOperatorNames(string s)
         { 
             s = s.ToLower();
-            s = s.Replace("plus", "+");
-            s = s.Replace("minus", "-");
-            s = s.Replace("into", "*");
-            s = s.Replace("divide", "/");
+            var operatorDictionaryToProcess = InStackCalculationOperatorFetch.GetAvailableOperators();
+            foreach(var oper in operatorDictionaryToProcess)
+            {
+                s = s.Replace(oper.Key, oper.Value);
+            }
             return s;
         }
     }

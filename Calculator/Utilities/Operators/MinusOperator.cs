@@ -7,7 +7,7 @@ namespace Calculator.Utilities.Operators
 {
     internal class MinusOperator : IOperatorMethods
     {
-        public double Calculate(Stack<double> st, char sign, double val)
+        public double Calculate(Stack<double> currentStack, char sign, double val)
         {
             return -val;
         }
