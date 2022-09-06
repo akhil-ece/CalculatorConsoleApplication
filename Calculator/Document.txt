@@ -1,1 +1,4 @@
 ﻿All Docs Here
+ 
+Helpful Resources:
+Using Delegates: https://codereview.stackexchange.com/questions/194808/a-simple-c-calculator
