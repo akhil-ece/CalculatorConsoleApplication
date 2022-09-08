@@ -1,4 +1,5 @@
 ﻿using Calculator.Logics;
+using Calculator.Utilities;
 using System;
 
 namespace Calculator
@@ -31,6 +32,9 @@ namespace Calculator
                 CalculatorLogics calculator = new CalculatorLogics();
                 PreProcessingLogics preProcessingLogics = new PreProcessingLogics();
                 string processedSampleInputString = preProcessingLogics.ReplaceOperatorNames(sampleInputString);
+
+                //Validate user input
+
                 try 
                 {
                     var calculatedResult = calculator.Calculate(processedSampleInputString);
@@ -44,5 +48,26 @@ namespace Calculator
             }
             
         }
+        //private ValidationResponse ValidateInput(string inputMathString)
+        //{
+        //    ValidationResponse validation = new ValidationResponse();
+        //    foreach (var ch in inputMathString)
+        //    {
+        //        if (IsAnInValidLetter(ch))
+        //        {
+        //            validation.IsValid = false;
+        //        }
+        //    }
+        //    return validation;
+        //}
+        //private bool IsAnInValidLetter(char ch)
+        //{ 
+        //    if((ch >= 'a' && ch <='z') || (ch >= 'A' && ch <= 'Z'))
+        //    {
+        //        return true;
+        //    }
+        //    return false;
+        //}
+
     }
 }

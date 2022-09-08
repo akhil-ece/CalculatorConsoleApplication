@@ -18,7 +18,9 @@ namespace Calculator.Enums
         [Description("*")]
         into,
         [Description("/")]
-        divide
+        divide,
+        [Description("%")]
+        modulo
     }
     public static class EnumExtensionMethods
     {

@@ -16,6 +16,7 @@ namespace Calculator.Utilities.Operators
             operators.Add(OperatorsEnum.minus.ToString(), EnumExtensionMethods.GetEnumDescription(OperatorsEnum.minus));
             operators.Add(OperatorsEnum.divide.ToString(), EnumExtensionMethods.GetEnumDescription(OperatorsEnum.divide));
             operators.Add(OperatorsEnum.into.ToString(), EnumExtensionMethods.GetEnumDescription(OperatorsEnum.into));
+            operators.Add(OperatorsEnum.modulo.ToString(), EnumExtensionMethods.GetEnumDescription(OperatorsEnum.modulo));
             return operators;
         }
         public static IOperatorMethods InStackCalculationOperatorMethod(char sign)
@@ -34,6 +35,9 @@ namespace Calculator.Utilities.Operators
                     break;
                 case '/':
                     operatorMethods = new DivideOperator();
+                    break;
+                case '%':
+                    operatorMethods = new ModuloOperator();
                     break;
                 default:
                     return operatorMethods;
