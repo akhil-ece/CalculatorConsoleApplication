@@ -31,6 +31,12 @@ namespace Calculator
                 CalculatorLogics calculator = new CalculatorLogics();
                 PreProcessingLogics preProcessingLogics = new PreProcessingLogics();
                 string processedSampleInputString = preProcessingLogics.ReplaceOperatorNames(sampleInputString);
+                var errorPositionString = preProcessingLogics.ValidateUserInput(sampleInputString);
+                if (!string.IsNullOrEmpty(errorPositionString))
+                {
+                    Console.WriteLine(errorPositionString);
+                    continue;
+                }
                 try 
                 {
                     var calculatedResult = calculator.Calculate(processedSampleInputString);
